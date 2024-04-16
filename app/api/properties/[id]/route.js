@@ -1,13 +1,19 @@
 import connectDB from "@/config/database";
 import Property from "@/models/Property";
 
-export const GET = async () => {
+export const GET = async (_, { params }) => {
   try {
     await connectDB();
 
-    const properties = await Property.find({});
+    const property = await Property.findById(params.id);
 
-    return new Response(JSON.stringify(properties), {
+    if (!property) {
+      return new Response("Property not found", {
+        status: 404,
+      });
+    }
+
+    return new Response(JSON.stringify(property), {
       status: 200,
     });
   } catch (error) {
