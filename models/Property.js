@@ -87,6 +87,6 @@ const PropertySchema = new Schema(
   }
 );
 
-const Property = models.property || model("Property", PropertySchema);
+const Property = models.Property || model("Property", PropertySchema);
 
 export default Property;
